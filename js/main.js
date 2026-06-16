@@ -116,6 +116,7 @@
             ${price}
             ${avail}
           </div>
+          ${p.investment ? `<p class="project-invest"><span>Investment</span>${esc(p.investment)}</p>` : ""}
           <div class="project-actions">
             <a href="#discovery" class="btn btn-primary">Enquire about ${esc(p.name)}</a>
             ${brochure}

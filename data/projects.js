@@ -67,6 +67,8 @@ const CURRENT_PROJECTS = [
       "300 m to the beach · fully furnished · handover within 12 months"
     ],
     availability: "One villa already sold — the final unit is available now.",
+    // Optional investor note (shown as a highlighted line). Projection from the brochure.
+    investment: "Projected rental ROI ≈ 10.9% p.a. average — 8.8% to 13.1% over 5 years (per brochure).",
     brochure: "assets/brochures/ayora-villas.pdf",
     images: [
       "ayora-1.jpg",  // pool & villa exterior

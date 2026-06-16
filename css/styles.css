@@ -243,6 +243,19 @@ button.project-media:hover .gallery-cue { background: var(--color-accent); }
 .spec-grid strong { font-size: .94rem; font-weight: 500; color: var(--color-ink); }
 .project-desc { color: var(--color-stone); font-size: .98rem; margin-bottom: 6px; }
 
+/* Investor note */
+.project-invest {
+  display: flex; align-items: baseline; gap: 10px; margin-top: 14px;
+  padding: 11px 14px; border-radius: 10px;
+  background: var(--color-accent-dk); border: 1px solid rgba(195,162,92,.35);
+  font-size: .9rem; color: var(--color-ink);
+}
+.project-invest span {
+  flex: none; font-size: .64rem; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; color: #fff; background: var(--color-accent-deep);
+  padding: 3px 8px; border-radius: 999px;
+}
+
 /* Action buttons row */
 .project-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
 .project-actions .btn { flex: 1 1 auto; }
