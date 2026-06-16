@@ -109,16 +109,16 @@ const COMPLETED_PROJECTS = [
   // --- Delivered projects with photos (shown first) ---
   { name: "Keanu & Kimono Villas", location: "Bali",    image: "keanu.jpg" },
   { name: "Villa Ivan",            location: "Bali",    image: "ivan.jpg" },
+  { name: "Villa Carlos",          location: "Padonan", image: "carlos.jpg" },
   { name: "Dylan Villa",           location: "Bali",    image: "dylan.jpg" },
   { name: "Unikorn Villas",        location: "Bali",    image: "unikorn.jpg" },
 
   // --- Delivered (photos available on request — drop a file name to add one) ---
-  { name: "Villa Carlos",          location: "Padonan", image: "" },
   { name: "Villa Rob",             location: "Bali",    image: "" },
   { name: "Buduk Project",         location: "Buduk",   image: "" },
-  { name: "Apartments · Piece of Paradise", location: "Bali", image: "" },
-  { name: "Townhouses · Piece of Paradise", location: "Bali", image: "" },
-  { name: "Studio · Piece of Paradise",     location: "Bali", image: "" },
+  { name: "Apartments · Piece of Paradise", location: "Cemagi", image: "" },
+  { name: "Townhouses · Piece of Paradise", location: "Cemagi", image: "" },
+  { name: "Studio · Piece of Paradise",     location: "Cemagi", image: "" },
   { name: "Uluwatu",               location: "Uluwatu", image: "" },
   { name: "Project Bingin",        location: "Bingin",  image: "" },
   { name: "Project Laszlo",        location: "Bali",    image: "" }
