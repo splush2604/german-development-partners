@@ -37,30 +37,31 @@ const CURRENT_PROJECTS = [
 
     // Short description — what exactly was/is built:
     description:
-      "Standalone luxury villas in Canggu's Green Zone, where a commercial " +
-      "licence allows 100% legal short-term rental. Double-height, cathedral-" +
-      "ceiling living spaces open to a private pool and garden, complete with a " +
-      "private sauna, premium European windows and high-end natural-material " +
-      "finishes. Delivered fully furnished and turnkey, each villa is led by a " +
-      "dedicated project manager with weekly progress updates.",
+      "Standalone luxury villas in Canggu's Green Zone, designed for both " +
+      "short-term rental and luxury living. 167 m² of living space, available " +
+      "as a 3-bedroom layout with pool area or a 4-bedroom configuration. " +
+      "Cathedral-ceiling living opens to a private pool and garden — the plot " +
+      "can be extended up to 4 Are for a larger garden. Private sauna, premium " +
+      "European windows and high-end natural-material finishes, delivered fully " +
+      "furnished and turnkey within 12 months, with weekly progress updates.",
 
     // Key facts shown as a spec grid on the card:
     specs: {
-      bedrooms: "3–4",
-      bathrooms: "—",                  // TODO: confirm
+      bedrooms: "3 or 4",
+      bathrooms: "",                   // TODO: confirm (left blank = hidden)
       style: "Contemporary tropical",
       location: "Canggu — Green Zone",
-      landSize: "—",                   // TODO: confirm (are / m²)
-      buildingSize: "—",               // TODO: confirm (m²)
-      ownership: "Leasehold",          // TODO: confirm term (years)
-      handover: "~12 month build",
+      landSize: "2.6–4 Are",
+      buildingSize: "167 m²",
+      ownership: "Leasehold · 29 yrs (extendable)",
+      handover: "Within 12 months",
       rental: "Commercial licence possible (legal STR)"
     },
 
     highlights: [
-      "Green Zone — commercial licence possible for legal short-term rental",
-      "Private sauna, premium windows & high-end finishes",
-      "Payment plan tied to construction milestones"
+      "Designed for short-term rental & luxury living",
+      "Green Zone — commercial licence possible for legal STR",
+      "Private sauna · fully furnished · handover within 12 months"
     ],
     availability: "1 villa already sold — 1 build slot still available.",
     brochure: "assets/brochures/ayora-villas.pdf",
@@ -77,7 +78,7 @@ const CURRENT_PROJECTS = [
   {
     id: "noru-townhouses",
     name: "Noru Townhouses",
-    location: "Bali",                  // TODO: confirm exact area (e.g. Canggu / Cemagi)
+    location: "Ungasan",
     type: "Townhouses · 6 units",
     status: "available",
     priceFrom: "€220,000",
@@ -85,27 +86,28 @@ const CURRENT_PROJECTS = [
     tagline: "Six contemporary townhouses — only four remaining.",
 
     description:
-      "A boutique collection of six contemporary townhouses — four still " +
-      "available. Open-plan living with floor-to-ceiling glazing flows out to a " +
-      "private plunge pool and lush tropical courtyard, with an optional rooftop " +
-      "terrace. Modern interiors throughout with premium finishes.",
+      "A boutique collection of six contemporary townhouses in Ungasan — four " +
+      "still available. Designed for effortless, practical living and pared back " +
+      "to the essentials, with no unnecessary frills. 80 m² of building on an " +
+      "80–100 m² plot, with an optional rooftop terrace — an affordable entry " +
+      "into the Bali property market.",
 
     specs: {
-      bedrooms: "—",                   // TODO: confirm
-      bathrooms: "—",                  // TODO: confirm
-      style: "Contemporary",
-      location: "Bali",                // TODO: confirm area
-      landSize: "—",                   // TODO: confirm
-      buildingSize: "—",               // TODO: confirm
-      ownership: "Leasehold",          // TODO: confirm term
-      handover: "—",                   // TODO: confirm
+      bedrooms: "",                    // TODO: confirm (left blank = hidden)
+      bathrooms: "",                   // TODO: confirm (left blank = hidden)
+      style: "Contemporary · pared-back",
+      location: "Ungasan",
+      landSize: "80–100 m²",
+      buildingSize: "80 m²",
+      ownership: "Leasehold (extendable)",
+      handover: "",                    // TODO: confirm (left blank = hidden)
       rental: "Rooftop terrace option available"
     },
 
     highlights: [
-      "Rooftop terrace option available",
-      "Private plunge pool & tropical courtyard",
-      "Open-plan living with floor-to-ceiling glazing"
+      "Effortless, practical living — built for expats",
+      "Pared back to the essentials, no unnecessary frills",
+      "Optional rooftop terrace · affordable entry to the Bali market"
     ],
     availability: "2 of 6 sold — 4 units still available.",
     brochure: "assets/brochures/noru-townhouses.pdf",
