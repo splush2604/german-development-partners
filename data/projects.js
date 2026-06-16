@@ -28,7 +28,7 @@ const CURRENT_PROJECTS = [
   {
     id: "ayora-villas",
     name: "Ayora Villas",
-    location: "Canggu — Green Zone",
+    location: "Cemagi — Pink Zone",
     type: "3–4 Bedroom Luxury Villas",
     status: "selling",
     priceFrom: "€350,000",
@@ -37,8 +37,9 @@ const CURRENT_PROJECTS = [
 
     // Short description — what exactly was/is built:
     description:
-      "Standalone luxury villas in Canggu's Green Zone, designed for both " +
-      "short-term rental and luxury living. 167 m² of living space, available " +
+      "Standalone luxury villas in Cemagi's Pink Zone (tourism-designated, " +
+      "ideal for legal short-term rental), designed for both short-term rental " +
+      "and luxury living. 167 m² of living space, available " +
       "as a 3-bedroom layout with pool area or a 4-bedroom configuration. " +
       "Cathedral-ceiling living opens to a private pool and garden — the plot " +
       "can be extended up to 4 Are for a larger garden. Private sauna, premium " +
@@ -48,9 +49,9 @@ const CURRENT_PROJECTS = [
     // Key facts shown as a spec grid on the card:
     specs: {
       bedrooms: "3 or 4",
-      bathrooms: "",                   // TODO: confirm (left blank = hidden)
+      bathrooms: "3",
       style: "Contemporary tropical",
-      location: "Canggu — Green Zone",
+      location: "Cemagi — Pink Zone",
       landSize: "2.6–4 Are",
       buildingSize: "167 m²",
       ownership: "Leasehold · 29 yrs (extendable)",
@@ -60,7 +61,7 @@ const CURRENT_PROJECTS = [
 
     highlights: [
       "Designed for short-term rental & luxury living",
-      "Green Zone — commercial licence possible for legal STR",
+      "Pink Zone (tourism) — ideal for legal short-term rental",
       "Private sauna · fully furnished · handover within 12 months"
     ],
     availability: "1 villa already sold — 1 build slot still available.",
