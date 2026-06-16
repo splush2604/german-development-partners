@@ -53,6 +53,32 @@ const CURRENT_PROJECTS = [
       "ayora-5.jpg",  // private sauna & gym
       "ayora-6.jpg"   // ensuite bathroom
     ]
+  },
+
+  {
+    id: "noru-townhouses",
+    name: "Noru Townhouses",
+    location: "Bali",                 // TODO: confirm exact area (e.g. Canggu / Uluwatu)
+    type: "Townhouses · 6 units",
+    status: "available",              // see STATUS options above
+    priceFrom: "€220,000",
+    priceNote: "rooftop terrace option available",
+    tagline: "Six contemporary townhouses — only four remaining.",
+    highlights: [
+      "Rooftop terrace option available",
+      "Private plunge pool & lush tropical courtyard",
+      "Open-plan living with floor-to-ceiling glazing",
+      "Contemporary design with premium finishes"
+    ],
+    availability: "2 of 6 sold — 4 units still available.",
+    images: [
+      "noru-1.jpg",  // exterior — the townhouses
+      "noru-2.jpg",  // pool & daybed
+      "noru-3.jpg",  // living room, round window
+      "noru-4.jpg",  // bedroom with garden view
+      "noru-5.jpg",  // kitchen & dining
+      "noru-6.jpg"   // bathroom
+    ]
   }
 
   // ---- ADD YOUR NEXT CURRENT PROJECT BELOW (copy the block above) ----
@@ -80,14 +106,22 @@ const CURRENT_PROJECTS = [
    --------------------------------------------------------------------------- */
 
 const COMPLETED_PROJECTS = [
-  { name: "Uluwatu",         location: "Uluwatu", image: "" },
-  { name: "Kailua — Ivan",   location: "Bali",    image: "" },
-  { name: "Project Koduk",   location: "Bali",    image: "" },
-  { name: "Project Carlos",  location: "Bali",    image: "" },
-  { name: "Project Bingin",  location: "Bingin",  image: "" },
-  { name: "Project Dylan",   location: "Bali",    image: "" },
-  { name: "Project Unicorn", location: "Bali",    image: "" },
-  { name: "Project Laszlo",  location: "Bali",    image: "" }
+  // --- Delivered projects with photos (shown first) ---
+  { name: "Keanu & Kimono Villas", location: "Bali",    image: "keanu.jpg" },
+  { name: "Villa Ivan",            location: "Bali",    image: "ivan.jpg" },
+  { name: "Dylan Villa",           location: "Bali",    image: "dylan.jpg" },
+  { name: "Unikorn Villas",        location: "Bali",    image: "unikorn.jpg" },
+
+  // --- Delivered (photos available on request — drop a file name to add one) ---
+  { name: "Villa Carlos",          location: "Padonan", image: "" },
+  { name: "Villa Rob",             location: "Bali",    image: "" },
+  { name: "Buduk Project",         location: "Buduk",   image: "" },
+  { name: "Apartments · Piece of Paradise", location: "Bali", image: "" },
+  { name: "Townhouses · Piece of Paradise", location: "Bali", image: "" },
+  { name: "Studio · Piece of Paradise",     location: "Bali", image: "" },
+  { name: "Uluwatu",               location: "Uluwatu", image: "" },
+  { name: "Project Bingin",        location: "Bingin",  image: "" },
+  { name: "Project Laszlo",        location: "Bali",    image: "" }
 ];
 
 
