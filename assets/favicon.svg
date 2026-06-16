@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="German Development Partners">
+  <rect width="64" height="64" rx="12" fill="#16264e"/>
+  <rect x="14" y="40.5" width="36" height="1.6" fill="#c3a25c"/>
+  <text x="32" y="35" text-anchor="middle"
+        font-family="Cormorant Garamond, Georgia, 'Times New Roman', serif"
+        font-size="26" font-weight="600" letter-spacing="1" fill="#c3a25c">GDP</text>
+</svg>

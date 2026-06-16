@@ -5,15 +5,17 @@
    (These are refined defaults — swap the hex codes once you have your palette.)
    ============================================================================= */
 :root {
-  --color-ink:        #1c1a17;   /* near-black text / dark sections */
-  --color-charcoal:   #2a2723;
-  --color-stone:      #6b655c;   /* muted body text */
-  --color-sand:       #f6f2ec;   /* warm light background */
-  --color-cream:      #fbf9f5;
-  --color-line:       #e4ddd2;   /* hairline borders */
-  --color-accent:     #b08d57;   /* gold / brass accent  <-- main brand accent */
-  --color-accent-dk:  #97774429; /* (unused helper)      */
-  --color-accent-deep:#8a6d3e;
+  /* ---- BRAND PALETTE (from the German Development Partners logo) ---- */
+  --color-ink:        #16264e;   /* deep navy — brand color, headings, dark sections */
+  --color-charcoal:   #213163;   /* lighter navy */
+  --color-stone:      #5c6275;   /* cool muted body text */
+  --color-sand:       #f3f1ea;   /* warm ivory section background */
+  --color-cream:      #fbfaf6;   /* lightest background */
+  --color-line:       #e3ddce;   /* hairline borders */
+  --color-accent:     #c3a25c;   /* logo gold / brass  <-- main brand accent */
+  --color-accent-dk:  #c3a25c29; /* gold tint (helper) */
+  --color-accent-deep:#a9863f;   /* darker gold for text & hovers */
+  --color-gold-light: #e3ca8f;   /* highlight for the gold rule */
   --color-white:      #ffffff;
 
   /* Status label colors */
@@ -87,16 +89,24 @@ h3 { font-size: 1.35rem; }
   border-bottom: 1px solid var(--color-line);
 }
 .header-inner { display: flex; align-items: center; justify-content: space-between; height: 74px; }
-.brand { display: flex; align-items: center; gap: 12px; }
-.brand-logo { height: 40px; width: auto; }
-.brand-mark {
-  display: inline-grid; place-items: center;
-  width: 42px; height: 42px; border-radius: 9px;
-  background: var(--color-ink); color: var(--color-accent);
-  font-family: var(--font-serif); font-weight: 600; font-size: 1.05rem; letter-spacing: .04em;
+/* Logo lockup (recreates the wordmark in navy + gold) */
+.brand { display: inline-flex; flex-direction: column; align-items: center; gap: 4px; }
+.brand-logo { height: 44px; width: auto; }   /* used if you swap in an image logo */
+.brand-wordmark {
+  font-family: var(--font-serif); font-weight: 500;
+  font-size: clamp(.92rem, 1.5vw, 1.18rem); line-height: 1;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--color-ink); white-space: nowrap;
 }
-.brand-name { font-family: var(--font-serif); font-weight: 600; font-size: 1.12rem; line-height: 1.1; display: flex; flex-direction: column; }
-.brand-name small { font-family: var(--font-sans); font-weight: 500; font-size: .62rem; letter-spacing: .22em; text-transform: uppercase; color: var(--color-accent-deep); margin-top: 2px; }
+.brand-tag { display: flex; align-items: center; justify-content: center; gap: 8px; }
+.brand-tag::before, .brand-tag::after { content: ""; height: 1px; width: 18px; }
+.brand-tag::before { background: linear-gradient(90deg, transparent, var(--color-accent)); }
+.brand-tag::after  { background: linear-gradient(90deg, var(--color-accent), transparent); }
+.brand-tag span {
+  font-family: var(--font-sans); font-weight: 600; font-size: .56rem;
+  letter-spacing: .28em; text-transform: uppercase; white-space: nowrap;
+  color: var(--color-accent-deep);
+}
 .nav { display: flex; align-items: center; gap: 30px; }
 .nav a { font-size: .92rem; color: var(--color-charcoal); font-weight: 400; transition: color .2s; }
 .nav a:hover { color: var(--color-accent-deep); }
@@ -109,9 +119,9 @@ h3 { font-size: 1.35rem; }
 .hero {
   position: relative; min-height: 90vh; display: flex; align-items: center;
   background:
-    linear-gradient(120deg, rgba(28,26,23,.72), rgba(28,26,23,.30)),
+    linear-gradient(120deg, rgba(13,22,48,.78), rgba(13,22,48,.34)),
     url("../assets/img/hero.jpg") center/cover no-repeat,
-    linear-gradient(120deg, #2a2723, #4a443c);  /* fallback gradient until hero.jpg added */
+    linear-gradient(125deg, #0f1a38 0%, #16264e 55%, #25386a 100%);  /* navy fallback until hero.jpg added */
   color: #fff;
 }
 .hero-content { position: relative; max-width: 760px; padding-top: 60px; padding-bottom: 60px; }
@@ -265,9 +275,9 @@ h3 { font-size: 1.35rem; }
 /* ----------------------------- Footer ----------------------------- */
 .site-footer { background: var(--color-ink); color: rgba(255,255,255,.82); padding-top: 64px; }
 .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 40px; padding-bottom: 44px; }
-.footer-brand .brand-mark { margin-bottom: 14px; }
-.footer-name { font-family: var(--font-serif); font-size: 1.3rem; color: #fff; }
-.footer-tag { font-size: .72rem; letter-spacing: .22em; text-transform: uppercase; color: var(--color-accent); margin-top: 4px; }
+.footer-brand .brand { align-items: flex-start; }
+.footer-brand .brand-wordmark { color: #fff; font-size: 1.16rem; letter-spacing: .12em; }
+.footer-brand .brand-tag span { color: var(--color-accent); }
 .footer-col h4 { font-family: var(--font-sans); font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.55); margin-bottom: 14px; }
 .footer-col p { margin-bottom: 8px; font-size: .95rem; }
 .footer-col a:hover { color: var(--color-accent); }

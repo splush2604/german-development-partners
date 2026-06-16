@@ -11,6 +11,9 @@
   <meta property="og:description" content="Turnkey luxury villas & construction consulting in Bali and Lombok." />
   <meta property="og:type" content="website" />
 
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <meta name="theme-color" content="#16264e" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -21,12 +24,13 @@
   <!-- ============================= HEADER ============================= -->
   <header class="site-header" id="top">
     <div class="container header-inner">
-      <a href="#top" class="brand">
-        <!-- Replace this text with your logo image once you send it:
-             <img src="assets/img/logo.svg" alt="German Development Partners" class="brand-logo">
-        -->
-        <span class="brand-mark">GDP</span>
-        <span class="brand-name">German Development Partners<small>Quality Matters</small></span>
+      <a href="#top" class="brand" aria-label="German Development Partners — Quality Matters">
+        <!-- Logo recreated as a styled wordmark (navy + gold) to match your brand.
+             To use the exact image instead, drop logo.png/svg in assets/img/ and replace
+             the two spans below with:
+             <img src="assets/img/logo.svg" alt="German Development Partners" class="brand-logo"> -->
+        <span class="brand-wordmark">German Development Partners</span>
+        <span class="brand-tag"><span>Quality Matters</span></span>
       </a>
       <nav class="nav" aria-label="Primary">
         <a href="#about">About</a>
@@ -295,9 +299,10 @@
   <footer class="site-footer">
     <div class="container footer-grid">
       <div class="footer-brand">
-        <span class="brand-mark">GDP</span>
-        <p class="footer-name">German Development Partners</p>
-        <p class="footer-tag">Quality Matters</p>
+        <a href="#top" class="brand" aria-label="German Development Partners — Quality Matters">
+          <span class="brand-wordmark">German Development Partners</span>
+          <span class="brand-tag"><span>Quality Matters</span></span>
+        </a>
       </div>
       <div class="footer-col">
         <h4>Contact</h4>
