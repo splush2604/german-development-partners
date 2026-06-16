@@ -29,42 +29,44 @@ const CURRENT_PROJECTS = [
     id: "ayora-villas",
     name: "Ayora Villas",
     location: "Cemagi — Pink Zone",
-    type: "3–4 Bedroom Luxury Villas",
+    type: "3-Bedroom Villa · optional 4th",
     status: "selling",
-    priceFrom: "€350,000",
-    priceNote: "fully furnished & turnkey",
-    tagline: "Legal short-term rental villas in Canggu's Green Zone.",
+    priceFrom: "€330,000",
+    priceNote: "fully furnished & equipped",
+    tagline: "A private sanctuary in Cemagi — 300 m to the beach, legal short-term rental.",
 
     // Short description — what exactly was/is built:
     description:
-      "Standalone luxury villas in Cemagi's Pink Zone (tourism-designated, " +
-      "ideal for legal short-term rental), designed for both short-term rental " +
-      "and luxury living. 167 m² of living space, available " +
-      "as a 3-bedroom layout with pool area or a 4-bedroom configuration. " +
-      "Cathedral-ceiling living opens to a private pool and garden — the plot " +
-      "can be extended up to 4 Are for a larger garden. Private sauna, premium " +
-      "European windows and high-end natural-material finishes, delivered fully " +
-      "furnished and turnkey within 12 months, with weekly progress updates.",
+      "A compact luxury villa in the quiet village of Cemagi, just 300 m from " +
+      "the coast and optimised for holiday living and legal short-term rental. " +
+      "Its heart is a dramatic 47 m² double-height living and dining area under " +
+      "a pitched roof with triangular skylight. Three 18 m² en-suite bedrooms " +
+      "(two master suites upstairs, a pool-access guest room below), an " +
+      "integrated Finnish sauna and fitness studio opening to the pool deck, and " +
+      "a private pool framed by tropical planting. Pitched slate roof and natural " +
+      "stone facades, delivered fully furnished within 12 months — with the spa " +
+      "convertible into an optional fourth bedroom.",
 
     // Key facts shown as a spec grid on the card:
     specs: {
-      bedrooms: "3 or 4",
-      bathrooms: "3",
+      bedrooms: "3 (optional 4th)",
+      bathrooms: "3 en-suite + guest",
       style: "Contemporary tropical",
       location: "Cemagi — Pink Zone",
       landSize: "2.6–4 Are",
       buildingSize: "167 m²",
       ownership: "Leasehold · 29 yrs (extendable)",
       handover: "Within 12 months",
-      rental: "Commercial licence possible (legal STR)"
+      rental: "Pink Zone (commercial) — legal short-term rental"
     },
 
     highlights: [
-      "Designed for short-term rental & luxury living",
-      "Pink Zone (tourism) — ideal for legal short-term rental",
-      "Private sauna · fully furnished · handover within 12 months"
+      "Integrated Finnish sauna & fitness studio opening to the pool deck",
+      "Double-height 47 m² living under a triangular skylight",
+      "Pink Zone (commercial) — legally permitted short-term rental",
+      "300 m to the beach · fully furnished · handover within 12 months"
     ],
-    availability: "1 villa already sold — 1 build slot still available.",
+    availability: "One villa already sold — the final unit is available now.",
     brochure: "assets/brochures/ayora-villas.pdf",
     images: [
       "ayora-1.jpg",  // pool & villa exterior
@@ -80,35 +82,39 @@ const CURRENT_PROJECTS = [
     id: "noru-townhouses",
     name: "Noru Townhouses",
     location: "Ungasan",
-    type: "Townhouses · 6 units",
+    type: "2-Bed Townhouses · 6 units",
     status: "available",
     priceFrom: "€220,000",
-    priceNote: "rooftop terrace option available",
-    tagline: "Six contemporary townhouses — only four remaining.",
+    priceNote: "semi-furnished",
+    tagline: "Six private townhouses in Ungasan — effortless living, exceptional value.",
 
     description:
-      "A boutique collection of six contemporary townhouses in Ungasan — four " +
-      "still available. Designed for effortless, practical living and pared back " +
-      "to the essentials, with no unnecessary frills. 80 m² of building on an " +
-      "80–100 m² plot, with an optional rooftop terrace — an affordable entry " +
-      "into the Bali property market.",
+      "Six private townhouses in a gated, dead-end setting in Ungasan — minutes " +
+      "from Bingin and Uluwatu and a short drive to the airport. Designed for " +
+      "effortless expat living: a modern terrazzo kitchen with integrated wine " +
+      "cooler, a sunken living area with floor-to-ceiling glass opening to the " +
+      "pool, two bedrooms (one perfect as a home office), and a semi-open " +
+      "bathroom framed by a tropical garden. A private pool with sun deck and " +
+      "daybed alcove completes the retreat. 100 m² of living on a 120 m² plot, " +
+      "semi-furnished and built in 12 months.",
 
     specs: {
-      bedrooms: "",                    // TODO: confirm (left blank = hidden)
-      bathrooms: "",                   // TODO: confirm (left blank = hidden)
+      bedrooms: "2 (1 as office)",
+      bathrooms: "1 (semi-open)",
       style: "Contemporary · pared-back",
       location: "Ungasan",
-      landSize: "80–100 m²",
-      buildingSize: "80 m²",
+      landSize: "1.2 Are (120 m²)",
+      buildingSize: "100 m² living",
       ownership: "Leasehold (extendable)",
-      handover: "",                    // TODO: confirm (left blank = hidden)
-      rental: "Rooftop terrace option available"
+      handover: "12 months",
+      rental: "Ideal long-term expat rental"
     },
 
     highlights: [
-      "Effortless, practical living — built for expats",
-      "Pared back to the essentials, no unnecessary frills",
-      "Optional rooftop terrace · affordable entry to the Bali market"
+      "Private pool with sun deck & daybed alcove",
+      "Sunken living with floor-to-ceiling glass · terrazzo kitchen with wine cooler",
+      "2 bedrooms (one ideal as a home office) + storage room",
+      "Gated dead-end road — 5 min to Bingin, 8 min to Uluwatu"
     ],
     availability: "2 of 6 sold — 4 units still available.",
     brochure: "assets/brochures/noru-townhouses.pdf",
