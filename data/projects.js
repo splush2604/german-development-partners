@@ -46,8 +46,12 @@ const CURRENT_PROJECTS = [
     // Photos: drop files in assets/img/ and list them here.
     // Leave the array empty [] to show an elegant placeholder instead.
     images: [
-      // "ayora-1.jpg",
-      // "ayora-2.jpg"
+      "ayora-1.jpg",  // pool & villa exterior
+      "ayora-2.jpg",  // grand living / dining
+      "ayora-3.jpg",  // living room, cathedral window
+      "ayora-4.jpg",  // master bedroom with pool view
+      "ayora-5.jpg",  // private sauna & gym
+      "ayora-6.jpg"   // ensuite bathroom
     ]
   }
 
