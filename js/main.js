@@ -1,7 +1,7 @@
 /* =============================================================================
    GERMAN DEVELOPMENT PARTNERS — SITE LOGIC
    You normally never need to edit this file. Project content lives in
-   data/projects.js. This file just renders that data and runs the funnel.
+   data/projects.js. This file renders that data and runs the funnel + gallery.
    ============================================================================= */
 (function () {
   "use strict";
@@ -17,8 +17,23 @@
     coming:       "Coming Soon"
   };
 
+  // Spec rows shown on a current-project card (label -> key in specs object)
+  const SPEC_FIELDS = [
+    ["Bedrooms",  "bedrooms"],
+    ["Bathrooms", "bathrooms"],
+    ["Style",     "style"],
+    ["Location",  "location"],
+    ["Land",      "landSize"],
+    ["Building",  "buildingSize"],
+    ["Ownership", "ownership"],
+    ["Handover",  "handover"]
+  ];
+
   const esc = (s) => String(s == null ? "" : s)
     .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+
+  // Galleries registry for the lightbox, keyed by a generated id.
+  const galleries = {};
 
   /* ----------------------- Render: stats bar ----------------------- */
   function renderStats() {
@@ -32,13 +47,14 @@
   }
 
   /* ----------------------- Render: current projects ----------------------- */
-  function mediaFor(images, altBase) {
-    if (images && images.length) {
-      const imgs = images.map((src, i) =>
-        `<img src="${IMG_PATH}${esc(src)}" alt="${esc(altBase)} — photo ${i + 1}" loading="lazy">`).join("");
-      return `<div class="project-gallery">${imgs}</div>`;
-    }
-    return `<div class="placeholder-photo"><span>Add photos in data/projects.js</span></div>`;
+  function specRows(specs) {
+    if (!specs) return "";
+    const rows = SPEC_FIELDS
+      .filter(([, key]) => specs[key] != null && String(specs[key]).trim() !== "")
+      .map(([label, key]) => `
+        <li><span>${esc(label)}</span><strong>${esc(specs[key])}</strong></li>`)
+      .join("");
+    return rows ? `<ul class="spec-grid">${rows}</ul>` : "";
   }
 
   function renderProjects() {
@@ -48,30 +64,62 @@
       el.innerHTML = `<p class="section-lead">New projects are being prepared. Book a call to hear about upcoming releases.</p>`;
       return;
     }
-    el.innerHTML = data.CURRENT_PROJECTS.map(p => {
+
+    // Two-up layout when there is more than one available project.
+    el.classList.toggle("is-grid", data.CURRENT_PROJECTS.length > 1);
+
+    el.innerHTML = data.CURRENT_PROJECTS.map((p, idx) => {
       const status = STATUS_LABELS[p.status] ? p.status : "selling";
-      const highlights = (p.highlights || []).map(h => `<li>${esc(h)}</li>`).join("");
+      const hasImgs = p.images && p.images.length;
+      const gid = "cur-" + idx;
+      if (hasImgs) galleries[gid] = { title: p.name, description: p.description || "", images: p.images.slice() };
+
+      const cover = hasImgs
+        ? `<img src="${IMG_PATH}${esc(p.images[0])}" alt="${esc(p.name)}" loading="lazy">
+           <span class="gallery-cue"><span class="cue-ico">⤢</span> View ${p.images.length} renderings</span>`
+        : `<div class="placeholder-photo"><span>Add photos in data/projects.js</span></div>`;
+
+      const media = hasImgs
+        ? `<button type="button" class="project-media" data-gallery="${gid}"
+                   aria-label="Open photo gallery for ${esc(p.name)}">
+             <span class="status-badge status-${status}">${STATUS_LABELS[status]}</span>
+             ${cover}
+           </button>`
+        : `<div class="project-media">
+             <span class="status-badge status-${status}">${STATUS_LABELS[status]}</span>
+             ${cover}
+           </div>`;
+
       const price = p.priceFrom
         ? `<div class="project-price">from ${esc(p.priceFrom)} ${p.priceNote ? `<small>${esc(p.priceNote)}</small>` : ""}</div>`
         : "";
       const avail = p.availability ? `<div class="project-availability">${esc(p.availability)}</div>` : "";
+      const desc = p.description ? `<p class="project-desc">${esc(p.description)}</p>` : "";
+      const brochure = p.brochure
+        ? `<a class="btn btn-ghost btn-brochure" href="${esc(p.brochure)}" download
+              aria-label="Download the ${esc(p.name)} brochure (PDF)">
+             <span class="cue-ico">⤓</span> Download brochure
+           </a>`
+        : "";
+
       return `
-      <article class="project-card" id="${esc(p.id)}">
-        <div class="project-media">
-          <span class="status-badge status-${status}">${STATUS_LABELS[status]}</span>
-          ${mediaFor(p.images, p.name)}
-        </div>
+      <article class="project-card vcard" id="${esc(p.id)}">
+        ${media}
         <div class="project-body">
           <span class="project-loc">${esc(p.location)}</span>
           <h3 class="project-name">${esc(p.name)}</h3>
           <p class="project-type">${esc(p.type)}</p>
           ${p.tagline ? `<p class="project-tagline">${esc(p.tagline)}</p>` : ""}
-          <ul class="project-highlights">${highlights}</ul>
+          ${specRows(p.specs)}
+          ${desc}
           <div class="project-meta">
             ${price}
             ${avail}
           </div>
-          <a href="#discovery" class="btn btn-primary project-cta">Enquire about ${esc(p.name)}</a>
+          <div class="project-actions">
+            <a href="#discovery" class="btn btn-primary">Enquire about ${esc(p.name)}</a>
+            ${brochure}
+          </div>
         </div>
       </article>`;
     }).join("");
@@ -81,12 +129,21 @@
   function renderTrack() {
     const el = document.getElementById("track-grid");
     if (!el) return;
-    el.innerHTML = data.COMPLETED_PROJECTS.map(p => {
-      const media = p.image
-        ? `<img src="${IMG_PATH}${esc(p.image)}" alt="${esc(p.name)}" loading="lazy">`
+    el.innerHTML = data.COMPLETED_PROJECTS.map((p, idx) => {
+      const hasImg = !!p.image;
+      const gid = "done-" + idx;
+      if (hasImg) galleries[gid] = { title: p.name, description: p.description || "", images: [p.image] };
+
+      const media = hasImg
+        ? `<img src="${IMG_PATH}${esc(p.image)}" alt="${esc(p.name)}" loading="lazy">
+           ${p.description ? `<span class="track-cue">View</span>` : ""}`
         : `<div class="placeholder-photo"><span>Photo</span></div>`;
+
+      const clickable = hasImg ? `tabindex="0" role="button" data-gallery="${gid}"
+           aria-label="View ${esc(p.name)}"` : "";
+
       return `
-      <div class="track-card">
+      <div class="track-card ${hasImg ? "is-clickable" : ""}" ${clickable}>
         <div class="track-media">${media}</div>
         <div class="track-info">
           <div class="track-name">${esc(p.name)}</div>
@@ -94,6 +151,72 @@
         </div>
       </div>`;
     }).join("");
+  }
+
+  /* ----------------------- Lightbox gallery ----------------------- */
+  function initLightbox() {
+    const lb = document.getElementById("lightbox");
+    if (!lb) return;
+    const imgEl   = lb.querySelector(".lb-img");
+    const titleEl = lb.querySelector(".lb-title");
+    const descEl  = lb.querySelector(".lb-desc");
+    const countEl = lb.querySelector(".lb-count");
+    const btnPrev = lb.querySelector(".lb-prev");
+    const btnNext = lb.querySelector(".lb-next");
+    const btnClose= lb.querySelector(".lb-close");
+
+    let current = null, index = 0, lastFocus = null;
+
+    function show(i) {
+      const imgs = current.images;
+      index = (i + imgs.length) % imgs.length;
+      imgEl.src = IMG_PATH + imgs[index];
+      imgEl.alt = current.title + " — image " + (index + 1);
+      titleEl.textContent = current.title;
+      descEl.textContent = current.description || "";
+      const multi = imgs.length > 1;
+      countEl.textContent = multi ? (index + 1) + " / " + imgs.length : "";
+      btnPrev.hidden = btnNext.hidden = !multi;
+    }
+    function open(gid) {
+      current = galleries[gid];
+      if (!current) return;
+      lastFocus = document.activeElement;
+      show(0);
+      lb.classList.add("open");
+      lb.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      btnClose.focus();
+    }
+    function close() {
+      lb.classList.remove("open");
+      lb.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      imgEl.src = "";
+      if (lastFocus) lastFocus.focus();
+    }
+
+    // Open from any element carrying data-gallery
+    document.addEventListener("click", (e) => {
+      const trigger = e.target.closest("[data-gallery]");
+      if (trigger) { e.preventDefault(); open(trigger.getAttribute("data-gallery")); }
+    });
+    // Keyboard activation for track cards
+    document.addEventListener("keydown", (e) => {
+      const t = e.target.closest("[data-gallery]");
+      if (t && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); open(t.getAttribute("data-gallery")); }
+    });
+
+    btnPrev.addEventListener("click", () => show(index - 1));
+    btnNext.addEventListener("click", () => show(index + 1));
+    btnClose.addEventListener("click", close);
+    lb.addEventListener("click", (e) => { if (e.target === lb) close(); });
+    document.addEventListener("keydown", (e) => {
+      if (!lb.classList.contains("open")) return;
+      if (e.key === "Escape") close();
+      else if (e.key === "ArrowLeft" && !btnPrev.hidden) show(index - 1);
+      else if (e.key === "ArrowRight" && !btnNext.hidden) show(index + 1);
+    });
   }
 
   /* ----------------------- Mobile nav ----------------------- */
@@ -133,7 +256,6 @@
       bar.style.width = ((i + 1) / steps.length * 100) + "%";
       current = i;
     }
-
     function validStep(i) {
       const inputs = steps[i].querySelectorAll("input, select, textarea");
       for (const inp of inputs) {
@@ -147,13 +269,9 @@
 
     form.addEventListener("submit", function (e) {
       if (!validStep(current)) { e.preventDefault(); return; }
-
-      // If a real form endpoint is configured, let it POST normally.
       const action = form.getAttribute("action") || "";
       const isPlaceholder = action.includes("your-form-id") || action.trim() === "";
-
       if (isPlaceholder) {
-        // No backend yet: show the in-page confirmation instead of erroring.
         e.preventDefault();
         steps.forEach(s => s.classList.remove("is-active"));
         successStep.classList.add("is-active");
@@ -161,7 +279,6 @@
         bar.style.width = "100%";
         successStep.scrollIntoView({ behavior: "smooth", block: "center" });
       }
-      // else: real submit proceeds (e.g. Formspree handles the redirect/thanks).
     });
 
     show(0);
@@ -172,6 +289,7 @@
     renderStats();
     renderProjects();
     renderTrack();
+    initLightbox();
     initNav();
     initFunnel();
     const y = document.getElementById("year");

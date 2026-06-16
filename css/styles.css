@@ -168,14 +168,31 @@ h3 { font-size: 1.35rem; }
 /* ----------------------------- Current Projects ----------------------------- */
 .projects { background: var(--color-sand); }
 .project-list { display: grid; gap: 40px; }
+/* Two available projects sit side by side; one spans full width. */
+.project-list.is-grid { grid-template-columns: repeat(2, 1fr); align-items: start; }
 .project-card {
-  display: grid; grid-template-columns: 1.05fr 1fr; background: #fff; border-radius: var(--radius);
+  display: flex; flex-direction: column; background: #fff; border-radius: var(--radius);
   overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--color-line);
 }
-.project-media { position: relative; min-height: 340px; background: #ece5d9; }
-.project-media .placeholder-photo { width: 100%; height: 100%; }
-.project-gallery { display: grid; grid-auto-flow: column; grid-auto-columns: 100%; height: 100%; overflow-x: auto; scroll-snap-type: x mandatory; }
-.project-gallery img { width: 100%; height: 100%; object-fit: cover; scroll-snap-align: start; }
+/* Clickable media (button reset) with cover image filling the top of the card */
+.project-media {
+  position: relative; display: block; width: 100%; aspect-ratio: 16/10;
+  background: #dfe4ee; border: 0; padding: 0; margin: 0; cursor: pointer; overflow: hidden;
+}
+.project-media > img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+.project-media .placeholder-photo { position: absolute; inset: 0; }
+button.project-media:hover > img,
+button.project-media:focus-visible > img { transform: scale(1.04); }
+button.project-media:focus-visible { outline: 3px solid var(--color-accent); outline-offset: -3px; }
+.gallery-cue {
+  position: absolute; right: 16px; bottom: 16px; z-index: 2;
+  display: inline-flex; align-items: center; gap: 7px;
+  background: rgba(22,38,78,.82); color: #fff; backdrop-filter: blur(4px);
+  font-size: .78rem; font-weight: 500; letter-spacing: .02em;
+  padding: 8px 14px; border-radius: 999px; transition: background .2s;
+}
+button.project-media:hover .gallery-cue { background: var(--color-accent); }
+.cue-ico { font-size: .95rem; line-height: 1; }
 .status-badge {
   position: absolute; top: 18px; left: 18px; z-index: 2;
   font-size: .72rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
@@ -199,14 +216,69 @@ h3 { font-size: 1.35rem; }
 .project-price { font-family: var(--font-serif); font-size: 1.7rem; color: var(--color-ink); }
 .project-price small { font-family: var(--font-sans); font-size: .8rem; color: var(--color-stone); font-weight: 400; }
 .project-availability { font-size: .9rem; color: var(--st-available); font-weight: 500; }
-.project-cta { margin-top: 22px; }
+
+/* Spec grid (bedrooms, bathrooms, style, location …) */
+.spec-grid {
+  list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+  background: var(--color-line); border: 1px solid var(--color-line);
+  border-radius: 12px; overflow: hidden; margin: 18px 0;
+}
+.spec-grid li { background: #fff; padding: 11px 14px; display: flex; flex-direction: column; gap: 2px; }
+.spec-grid span { font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: var(--color-accent-deep); font-weight: 600; }
+.spec-grid strong { font-size: .94rem; font-weight: 500; color: var(--color-ink); }
+.project-desc { color: var(--color-stone); font-size: .98rem; margin-bottom: 6px; }
+
+/* Action buttons row */
+.project-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
+.project-actions .btn { flex: 1 1 auto; }
+.btn-brochure { display: inline-flex; align-items: center; gap: 8px; }
 
 /* ----------------------------- Track Record ----------------------------- */
 .track-record { background: var(--color-cream); }
 .track-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
-.track-card { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); background: #fff; border: 1px solid var(--color-line); }
-.track-media { aspect-ratio: 4/3; }
+.track-card { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); background: #fff; border: 1px solid var(--color-line); transition: transform .2s ease, box-shadow .2s ease; }
+.track-card.is-clickable { cursor: pointer; }
+.track-card.is-clickable:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.track-card.is-clickable:focus-visible { outline: 3px solid var(--color-accent); outline-offset: 2px; }
+.track-media { position: relative; aspect-ratio: 4/3; overflow: hidden; }
+.track-media img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+.track-card.is-clickable:hover .track-media img { transform: scale(1.05); }
 .track-media .placeholder-photo { width: 100%; height: 100%; }
+.track-cue {
+  position: absolute; right: 12px; bottom: 12px;
+  background: rgba(22,38,78,.82); color: #fff; font-size: .7rem; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase; padding: 5px 11px; border-radius: 999px;
+  opacity: 0; transform: translateY(4px); transition: .2s;
+}
+.track-card.is-clickable:hover .track-cue { opacity: 1; transform: none; }
+
+/* ----------------------------- Lightbox ----------------------------- */
+.lightbox {
+  position: fixed; inset: 0; z-index: 100; display: none;
+  align-items: center; justify-content: center;
+  background: rgba(13,22,48,.94); padding: 4vh 4vw;
+}
+.lightbox.open { display: flex; animation: lb-in .25s ease; }
+@keyframes lb-in { from { opacity: 0; } to { opacity: 1; } }
+.lb-stage { margin: 0; max-width: 1100px; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.lb-img {
+  max-width: 100%; max-height: 76vh; width: auto; height: auto;
+  border-radius: 8px; box-shadow: 0 24px 70px rgba(0,0,0,.5); object-fit: contain; background: #0d1630;
+}
+.lb-caption { text-align: center; color: #fff; max-width: 720px; }
+.lb-title { display: block; font-family: var(--font-serif); font-size: 1.5rem; }
+.lb-desc { display: block; color: rgba(255,255,255,.78); font-size: .95rem; margin-top: 6px; }
+.lb-count { display: block; color: var(--color-accent); font-size: .82rem; letter-spacing: .14em; margin-top: 10px; }
+.lb-close, .lb-prev, .lb-next {
+  position: absolute; background: rgba(255,255,255,.10); color: #fff; border: 0;
+  width: 52px; height: 52px; border-radius: 50%; cursor: pointer; line-height: 1;
+  display: grid; place-items: center; transition: background .2s; backdrop-filter: blur(4px);
+}
+.lb-close:hover, .lb-prev:hover, .lb-next:hover { background: var(--color-accent); }
+.lb-close:focus-visible, .lb-prev:focus-visible, .lb-next:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.lb-close { top: 22px; right: 22px; font-size: 1.8rem; }
+.lb-prev  { left: 22px; top: 50%; transform: translateY(-50%); font-size: 2rem; }
+.lb-next  { right: 22px; top: 50%; transform: translateY(-50%); font-size: 2rem; }
 .track-info { padding: 16px 18px; }
 .track-name { font-family: var(--font-serif); font-size: 1.15rem; }
 .track-loc { font-size: .82rem; color: var(--color-stone); letter-spacing: .04em; }
@@ -292,8 +364,8 @@ h3 { font-size: 1.35rem; }
   .nav-cta { margin: 8px 28px; text-align: center; }
   .nav-toggle { display: flex; }
   .about-grid, .consulting-grid, .discovery-grid { grid-template-columns: 1fr; gap: 48px; }
-  .project-card { grid-template-columns: 1fr; }
-  .project-media { min-height: 260px; }
+  .project-list.is-grid { grid-template-columns: 1fr; }
+  .spec-grid { grid-template-columns: 1fr 1fr; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
   .stat:nth-child(2) { border-right: 0; }
   .track-grid { grid-template-columns: repeat(2, 1fr); }
@@ -305,4 +377,8 @@ h3 { font-size: 1.35rem; }
   .funnel-card { padding: 26px 22px; }
   .footer-grid { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: column; gap: 8px; }
+  .project-actions .btn { flex: 1 1 100%; }
+  .lb-close, .lb-prev, .lb-next { width: 42px; height: 42px; }
+  .lb-prev { left: 8px; } .lb-next { right: 8px; } .lb-close { top: 12px; right: 12px; }
+  .lb-img { max-height: 64vh; }
 }

@@ -20,7 +20,8 @@
      "sold"        -> grey     "Sold"
      "coming"      -> purple  "Coming Soon"
 
-   To mark a project sold, just change its "status" to "sold".
+   NOTE: values marked  "—"  or  // TODO  still need to be confirmed by you.
+   Clicking a current project's photo opens a full gallery of all its renderings.
    ============================================================================= */
 
 const CURRENT_PROJECTS = [
@@ -29,22 +30,40 @@ const CURRENT_PROJECTS = [
     name: "Ayora Villas",
     location: "Canggu — Green Zone",
     type: "3–4 Bedroom Luxury Villas",
-    status: "selling",              // see STATUS options above
+    status: "selling",
     priceFrom: "€350,000",
     priceNote: "fully furnished & turnkey",
-    // Short headline shown under the title:
     tagline: "Legal short-term rental villas in Canggu's Green Zone.",
-    // Bullet highlights shown on the card:
+
+    // Short description — what exactly was/is built:
+    description:
+      "Standalone luxury villas in Canggu's Green Zone, where a commercial " +
+      "licence allows 100% legal short-term rental. Double-height, cathedral-" +
+      "ceiling living spaces open to a private pool and garden, complete with a " +
+      "private sauna, premium European windows and high-end natural-material " +
+      "finishes. Delivered fully furnished and turnkey, each villa is led by a " +
+      "dedicated project manager with weekly progress updates.",
+
+    // Key facts shown as a spec grid on the card:
+    specs: {
+      bedrooms: "3–4",
+      bathrooms: "—",                  // TODO: confirm
+      style: "Contemporary tropical",
+      location: "Canggu — Green Zone",
+      landSize: "—",                   // TODO: confirm (are / m²)
+      buildingSize: "—",               // TODO: confirm (m²)
+      ownership: "Leasehold",          // TODO: confirm term (years)
+      handover: "~12 month build",
+      rental: "Commercial licence possible (legal STR)"
+    },
+
     highlights: [
-      "Green Zone location — commercial licence possible for 100% legal short-term rentals",
-      "Private sauna, premium windows & high-end finishes throughout",
-      "Dedicated project manager with weekly progress updates",
-      "Payment plan tied to construction milestones (~1 year build)"
+      "Green Zone — commercial licence possible for legal short-term rental",
+      "Private sauna, premium windows & high-end finishes",
+      "Payment plan tied to construction milestones"
     ],
-    // Availability note:
     availability: "1 villa already sold — 1 build slot still available.",
-    // Photos: drop files in assets/img/ and list them here.
-    // Leave the array empty [] to show an elegant placeholder instead.
+    brochure: "assets/brochures/ayora-villas.pdf",
     images: [
       "ayora-1.jpg",  // pool & villa exterior
       "ayora-2.jpg",  // grand living / dining
@@ -58,19 +77,38 @@ const CURRENT_PROJECTS = [
   {
     id: "noru-townhouses",
     name: "Noru Townhouses",
-    location: "Bali",                 // TODO: confirm exact area (e.g. Canggu / Uluwatu)
+    location: "Bali",                  // TODO: confirm exact area (e.g. Canggu / Cemagi)
     type: "Townhouses · 6 units",
-    status: "available",              // see STATUS options above
+    status: "available",
     priceFrom: "€220,000",
     priceNote: "rooftop terrace option available",
     tagline: "Six contemporary townhouses — only four remaining.",
+
+    description:
+      "A boutique collection of six contemporary townhouses — four still " +
+      "available. Open-plan living with floor-to-ceiling glazing flows out to a " +
+      "private plunge pool and lush tropical courtyard, with an optional rooftop " +
+      "terrace. Modern interiors throughout with premium finishes.",
+
+    specs: {
+      bedrooms: "—",                   // TODO: confirm
+      bathrooms: "—",                  // TODO: confirm
+      style: "Contemporary",
+      location: "Bali",                // TODO: confirm area
+      landSize: "—",                   // TODO: confirm
+      buildingSize: "—",               // TODO: confirm
+      ownership: "Leasehold",          // TODO: confirm term
+      handover: "—",                   // TODO: confirm
+      rental: "Rooftop terrace option available"
+    },
+
     highlights: [
       "Rooftop terrace option available",
-      "Private plunge pool & lush tropical courtyard",
-      "Open-plan living with floor-to-ceiling glazing",
-      "Contemporary design with premium finishes"
+      "Private plunge pool & tropical courtyard",
+      "Open-plan living with floor-to-ceiling glazing"
     ],
     availability: "2 of 6 sold — 4 units still available.",
+    brochure: "assets/brochures/noru-townhouses.pdf",
     images: [
       "noru-1.jpg",  // exterior — the townhouses
       "noru-2.jpg",  // pool & daybed
@@ -81,47 +119,57 @@ const CURRENT_PROJECTS = [
     ]
   }
 
-  // ---- ADD YOUR NEXT CURRENT PROJECT BELOW (copy the block above) ----
-  // ,{
-  //   id: "your-project-id",
-  //   name: "Project Name",
-  //   location: "Area",
-  //   type: "e.g. 2 Bedroom Villas",
-  //   status: "construction",
-  //   priceFrom: "€000,000",
-  //   priceNote: "fully furnished & turnkey",
-  //   tagline: "One-line hook.",
-  //   highlights: ["Point one", "Point two"],
-  //   availability: "X units available.",
-  //   images: []
-  // }
+  // ---- ADD YOUR NEXT CURRENT PROJECT BELOW (copy a block above) ----
 ];
 
 
 /* ---------------------------------------------------------------------------
    COMPLETED / REFERENCE PROJECTS
    ---------------------------------------------------------------------------
-   Simple list of delivered projects, shown as a track-record gallery.
-   Add an image file name to show a photo, or leave image: "" for a placeholder.
+   Delivered projects shown as a track-record gallery.
+   - Add an "image" file name to show a photo (leave "" for an elegant placeholder).
+   - Add a "description" (what was built) — for projects with a photo, clicking
+     the card opens it enlarged together with this description.
    --------------------------------------------------------------------------- */
 
 const COMPLETED_PROJECTS = [
   // --- Delivered projects with photos (shown first) ---
-  { name: "Keanu & Kimono Villas", location: "Bali",    image: "keanu.jpg" },
-  { name: "Villa Ivan",            location: "Bali",    image: "ivan.jpg" },
-  { name: "Villa Carlos",          location: "Padonan", image: "carlos.jpg" },
-  { name: "Dylan Villa",           location: "Bali",    image: "dylan.jpg" },
-  { name: "Unikorn Villas",        location: "Bali",    image: "unikorn.jpg" },
+  {
+    name: "Keanu & Kimono Villas", location: "Bali", image: "keanu.jpg",
+    description: "Two adjoining contemporary villas with timber-clad upper " +
+      "volumes, full-height glazing and a landscaped entry — built to German " +
+      "quality standards."
+  },
+  {
+    name: "Villa Ivan", location: "Bali", image: "ivan.jpg",
+    description: "A warm, natural-material villa with a vaulted timber-beam " +
+      "living and kitchen space, arched steel windows and a serene main suite."
+  },
+  {
+    name: "Villa Carlos", location: "Padonan", image: "carlos.jpg",
+    description: "A modern two-storey villa in Padonan wrapped around a private " +
+      "pool deck, with a poolside pavilion and lush tropical planting."
+  },
+  {
+    name: "Dylan Villa", location: "Bali", image: "dylan.jpg",
+    description: "A compact, elegant villa with an arched open-plan living " +
+      "pavilion opening onto a private plunge pool and stone terrace."
+  },
+  {
+    name: "Unikorn Villas", location: "Bali", image: "unikorn.jpg",
+    description: "Single-storey villas with a floating timber roof, dramatic " +
+      "evening lighting and a private walled garden entrance."
+  },
 
-  // --- Delivered (photos available on request — drop a file name to add one) ---
-  { name: "Villa Rob",             location: "Bali",    image: "" },
-  { name: "Buduk Project",         location: "Buduk",   image: "" },
-  { name: "Apartments · Piece of Paradise", location: "Cemagi", image: "" },
-  { name: "Townhouses · Piece of Paradise", location: "Cemagi", image: "" },
-  { name: "Studio · Piece of Paradise",     location: "Cemagi", image: "" },
-  { name: "Uluwatu",               location: "Uluwatu", image: "" },
-  { name: "Project Bingin",        location: "Bingin",  image: "" },
-  { name: "Project Laszlo",        location: "Bali",    image: "" }
+  // --- Delivered (photos available on request — add an image file name) ---
+  { name: "Villa Rob",             location: "Bali",    image: "", description: "" },
+  { name: "Buduk Project",         location: "Buduk",   image: "", description: "" },
+  { name: "Apartments · Piece of Paradise", location: "Cemagi", image: "", description: "" },
+  { name: "Townhouses · Piece of Paradise", location: "Cemagi", image: "", description: "" },
+  { name: "Studio · Piece of Paradise",     location: "Cemagi", image: "", description: "" },
+  { name: "Uluwatu",               location: "Uluwatu", image: "", description: "" },
+  { name: "Project Bingin",        location: "Bingin",  image: "", description: "" },
+  { name: "Project Laszlo",        location: "Bali",    image: "", description: "" }
 ];
 
 
